@@ -1,0 +1,33 @@
+{
+  "name": "Hooper Energy Solutions — CEIP",
+  "image": "mcr.microsoft.com/devcontainers/python:1-3.11-bookworm",
+  "customizations": {
+    "codespaces": {
+      "openFiles": [
+        "README.md",
+        "energy_dashboard_main.py"
+      ]
+    },
+    "vscode": {
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python"
+      },
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-toolsai.jupyter"
+      ]
+    }
+  },
+  "updateContentCommand": "[ -f packages.txt ] && sudo apt update && sudo apt upgrade -y && sudo xargs apt install -y <packages.txt; [ -f requirements.txt ] && pip3 install --user -r requirements.txt; echo '✅ Hooper Energy Solutions — environment ready'",
+  "postAttachCommand": {
+    "server": "streamlit run energy_dashboard_main.py --server.enableCORS false --server.enableXsrfProtection false --server.maxUploadSize 200"
+  },
+  "portsAttributes": {
+    "8501": {
+      "label": "CEIP Dashboard",
+      "onAutoForward": "openPreview"
+    }
+  },
+  "forwardPorts": [8501]
+}
